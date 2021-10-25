@@ -1,22 +1,41 @@
 {
+  //编译选项
   "compilerOptions": {
+    //目标代码(ts -> js5/6/7)
     "target": "esnext",
+    //目标代码需要使用的模块化方案(commonjs require/module.exports / es module import/export)
     "module": "esnext",
+    //开启严格模式(any)
     "strict": true,
+    //对jsx进行怎么样的处理
     "jsx": "preserve",
+    //辅助的导入功能(polifil)
     "importHelpers": true,
+    //按照node的方式去解析模块 文件夹自动导入index,添加js后缀等
     "moduleResolution": "node",
+    //跳过一些库的类型检测
+    // 1.提高性能2.如果有命名相同的变量会报错
     "skipLibCheck": true,
+    // export default/module.exports = {}
+    // es module 和 commonjs
     "esModuleInterop": true,
+    //允许从没有设置默认导出的模块中默认导入
     "allowSyntheticDefaultImports": true,
+    //是否生成映射文件
     "sourceMap": true,
+    //文件路径在解析时，基本url
     "baseUrl": ".",
+    //指定具体要解析使用的类型
     "types": ["webpack-env"],
+    //路径解析(类似于webpack alias)
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "components/*": ["src/components/*"]
     },
+    // 可以指定在项目中可以使用哪里库的类型(Proxy/Window/Document)
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
+  //哪些文件会被ts编译
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
@@ -24,5 +43,7 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
+  //如果在上述include文件中引入了第三方库，则会默认对整个第三方库进行类型检测
+  //加上exclude后则只对文件中导入类型做类型检测，不会对整个第三方库做解析
   "exclude": ["node_modules"]
 }

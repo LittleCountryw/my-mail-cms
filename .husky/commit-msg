@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+# 不知道为什么后面的指令也加上的话就会无法创建文件
+npx --no-install commitlint --edit
