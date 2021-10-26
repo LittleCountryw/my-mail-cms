@@ -1,6 +1,4 @@
 import { Module } from 'vuex'
-import { IRootState } from '../../types'
-import { IDashboardState } from './type'
 
 import {
   getCategoryGoodsCount,
@@ -8,6 +6,9 @@ import {
   getCategoryGoodsFavor,
   getAddressGoodsSale
 } from '@/service/main/analysis/dashboard'
+
+import { IDashboardState } from './type'
+import { IRootState } from '../../types'
 
 const dashboardModule: Module<IDashboardState, IRootState> = {
   namespaced: true,
@@ -20,7 +21,7 @@ const dashboardModule: Module<IDashboardState, IRootState> = {
     }
   },
   mutations: {
-    changecategoryGoodsCount(state, list) {
+    changeCategoryGoodsCount(state, list) {
       state.categoryGoodsCount = list
     },
     changeCategoryGoodsSale(state, list) {
@@ -36,14 +37,11 @@ const dashboardModule: Module<IDashboardState, IRootState> = {
   actions: {
     async getDashboardDataAction({ commit }) {
       const categoryCountResult = await getCategoryGoodsCount()
-      commit('changecategoryGoodsCount', categoryCountResult.data)
-
+      commit('changeCategoryGoodsCount', categoryCountResult.data)
       const categorySaleResult = await getCategoryGoodsSale()
       commit('changeCategoryGoodsSale', categorySaleResult.data)
-
       const categoryFavorResult = await getCategoryGoodsFavor()
       commit('changeCategoryGoodsFavor', categoryFavorResult.data)
-
       const addressGoodsResult = await getAddressGoodsSale()
       commit('changeAddressGoodsSale', addressGoodsResult.data)
     }
