@@ -28,7 +28,7 @@ const props = withDefaults(
     height: '360px'
   }
 )
-
+// 不能在setup中直接拿组件对象，因为此时组件还没有挂载
 onMounted(() => {
   const { setOptions } = useEchart(echartDivRef.value!)
 
